@@ -27,7 +27,7 @@ module.exports = (err,req,res,next)=>{
         const message=`your url is expired please try agian later`
         err=new Errorhandlers(message,400)
     }
-    res.staus(err.statuscode).json({
+    res.status(err.statuscode).json({
         success :false,
         message:err.message
     })

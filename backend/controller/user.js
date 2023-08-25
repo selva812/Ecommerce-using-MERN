@@ -20,5 +20,10 @@ router.post("/create-user",upload.single("file"),async(req,res,next)=>{
         avatar:fileurl,
     }
     console.log(user)
+    const newuser= await User.create(user)
+    res.status(201).json({
+        success:true,
+        newuser,
+    })
 })
 module.exports =router

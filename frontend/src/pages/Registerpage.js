@@ -4,28 +4,46 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {RxAvatar} from "react-icons/rx"
 import "./Registerpage.css"
+import axios from "axios"
+import { server } from '../Server';
 export default function Registerpage() {
-   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [name,setname]=useState("")
     const [repassword,setrepassword] =useState("")
     const [avatar,setavatar]=useState(null)
+    
+    const handlefilesubmit=(e)=>{
+     const file = e.target.files[0]
+     setavatar(file)
+    }
     const handleSubmit = async (e) => {
       e.preventDefault();
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+    const newForm = new FormData();
+
+    newForm.append("file", avatar);
+    newForm.append("name", name);
+    newForm.append("email", email);
+    newForm.append("password", password);
+
+    axios
+      .post(`${server}/user/create-user`, newForm, config)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err)=>{
+        console.log(err.response.data)
+      })
       if(password === repassword){
         console.log("Password is same ")
-      
       }
       else{
         console.log(" Please check the password")
         setrepassword("")
       }
-    }
-    const handlefilesubmit=(e)=>{
-     const file = e.target.files[0]
-     setavatar(file)
     }
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100 flex-column">
@@ -36,7 +54,7 @@ export default function Registerpage() {
       </div>
       <div className="mt-8 ">
         <div className="py-8 px-4 shadow ">
-          <form className="" onSubmit={handleSubmit} encType="multipart/form-data">
+          <form className="" onSubmit={(e)=>handleSubmit(e)} encType="multipart/form-data">
           <div>
               <label
                 htmlFor="name"
