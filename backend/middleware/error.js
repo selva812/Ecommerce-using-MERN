@@ -9,7 +9,6 @@ module.exports = (err,req,res,next)=>{
         const message = "Resource not found with this id .."
         err= new Errorhandlers(message,400)
     }
-
     //Duplicate key error
     if(err.code === 11000){
         const message=`Duplicate key ${Object.keys(err,keyvalue)} Entered`

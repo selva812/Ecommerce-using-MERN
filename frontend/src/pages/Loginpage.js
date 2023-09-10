@@ -3,35 +3,48 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import "./Loginpage.css"
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import {toast} from "react-toastify"
+import { server } from '../Server';
+import {useNavigate} from "react-router-dom"
 export default function Loginpage() {
-    // const navigate = useNavigate();
+     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+      await axios.post(`${server}/user/login-user`,{email,password},
+      {withCredentials:true}).then((res)=>{
+        toast.success("Login successful")
+        navigate("/")
+      }).catch((err)=>{
+        toast.error(err.response.data.message)
+      })
     }
   return (
-    <div className="container d-flex justify-content-center align-items-center vh=100 flex-column">
-      <div className="">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div className="container d-flex justify-content-center align-items-center vh-100 flex-column">
+      <div >
+        <h2 >
           Login to your account
         </h2>
       </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
+      <div >
+        <div >
+        <form  onSubmit={(e)=>handleSubmit(e)} encType="multipart/form-data">
+        <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700">
+                className="form-label">
                 Email address
               </label>
               <div className="mt-1">
                     <input
                     type="email"
                     name="email"
+                    id='email'
                     autoComplete="email"
                     required
                     value={email}
@@ -51,6 +64,7 @@ export default function Loginpage() {
                 <input
                   type={visible ? "text" : "password"}
                   name="password"
+                  id='password'
                   autoComplete="current-password"
                   required
                   value={password}
@@ -58,21 +72,27 @@ export default function Loginpage() {
                   className="form-control "
                 />
                 {visible ? (
-                  <VisibilityIcon
-                    className=""
+                  <VisibilityIcon className='visibleicon'
                     size={25}
                     onClick={() => setVisible(false)}
                   />
                 ) : (
-                  <VisibilityOffIcon
-                    className=""
+                  <VisibilityOffIcon className='visibleicon'
                     size={25}
                     onClick={() => setVisible(true)}
                   />
                 )}
               </div>
             </div>
+            <div className='mt-3 d-flex align-items-center justify-content-evenly'>
+              <div className='d-flex align-items-center'><input type="checkbox" className='form-check-input' />
+              <label className='form-label m-2'>Remember me</label></div>
+              <Link to={"/"}>Forgot password?</Link>
+            </div>
             <button className="btn btn-success mt-3 ">Login</button>
+            <div className="container mt-3">
+              <p>Don't have an account? <Link to={"/registerpage"}> Create account</Link></p>
+            </div>
             </form>
         </div>
     </div>

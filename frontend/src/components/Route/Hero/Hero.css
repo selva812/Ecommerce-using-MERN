@@ -1,0 +1,7 @@
+.bghero{
+    min-width: 100%;
+    min-height: 80vh;
+    border: 1px solid pink;
+    background-repeat: no-repeat;
+    margin-top: 8px;
+}

@@ -1,0 +1,16 @@
+.dropdownclass{
+    position: absolute;
+    z-index: 30;
+    width: 270px;
+    padding-bottom: 4px;
+   
+}
+.droptitle{
+    cursor: pointer;
+    font-size: medium;
+}
+.dropdownlist{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+}

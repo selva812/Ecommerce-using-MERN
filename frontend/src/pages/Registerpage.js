@@ -6,6 +6,7 @@ import {RxAvatar} from "react-icons/rx"
 import "./Registerpage.css"
 import axios from "axios"
 import { server } from '../Server';
+import {useNavigate} from "react-router-dom"
 export default function Registerpage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,37 +14,40 @@ export default function Registerpage() {
     const [name,setname]=useState("")
     const [repassword,setrepassword] =useState("")
     const [avatar,setavatar]=useState(null)
-    
+    const navigate=useNavigate()
     const handlefilesubmit=(e)=>{
      const file = e.target.files[0]
      setavatar(file)
     }
     const handleSubmit = async (e) => {
       e.preventDefault();
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
-
-    const newForm = new FormData();
-
-    newForm.append("file", avatar);
-    newForm.append("name", name);
-    newForm.append("email", email);
-    newForm.append("password", password);
-
-    axios
-      .post(`${server}/user/create-user`, newForm, config)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err)=>{
-        console.log(err.response.data)
-      })
       if(password === repassword){
-        console.log("Password is same ")
-      }
-      else{
-        console.log(" Please check the password")
-        setrepassword("")
-      }
+          const config = { headers: { "Content-Type": "multipart/form-data" } }
+          const newForm = new FormData()
+          newForm.append("file", avatar)
+          newForm.append("name", name)
+          newForm.append("email", email)
+          newForm.append("password", password) 
+          axios
+            .post(`${server}/user/create-user`, newForm, config)
+            .then((res) => {
+              console.log(res)
+              setEmail("")
+              setPassword("")
+              setname("")
+              setavatar()
+              if(res.data.success === true){
+                navigate("/")
+              }
+            })
+            .catch((err)=>{
+              console.log(err.response.data)
+            })
+        }
+        else{
+          alert("Password doesn't match")
+          setrepassword("")
+        }
     }
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100 flex-column">

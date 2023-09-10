@@ -1,9 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
+import Header from "../components/Layout/Header"
+import Hero from "../components/Route/Hero/Hero"
+import Category from "../components/Route/Category/Category"
+import Bestdeals from "../components/Bestdeals/Bestdeals"
+import "./Home.css"
 export default function Home() {
+     
   return (
-    <div>Home 
-        <Link to={"/registerpage"}>Registerpage</Link>
+    <div className=''>
+      <Header/>
+      <Hero/>
+      <Category/>
+      <Bestdeals/>
     </div>
   )
 }

@@ -8,11 +8,8 @@ process.on("uncaughtException",(err)=>{
 })
  
 //config
-if(process.env.MODE_ENV !== "PRODUCTION"){
-    require("dotenv").config({
-        path:"backend/config/.env"
-    })
-}
+require('dotenv').config()
+
 
 //connect to mongodb database
 connectdatabase()
