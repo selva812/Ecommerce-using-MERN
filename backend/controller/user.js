@@ -1,4 +1,4 @@
-const express=require("express")
+const express =require("express")
 const path= require("path")
 const router=express.Router()
 const User=require("../model/user")
@@ -9,6 +9,8 @@ const jwt=require("jsonwebtoken")
 const SendMail = require("../utils/Sendmail")
 const catchAsyncerror=require("../middleware/catchAsyncerror")
 const sendToken=require("../utils/jwtToken")
+const {isAuthenticated}= require("../middleware/auth")
+
 //create new user
 router.post("/create-user",upload.single("file"),async(req,res,next)=>{
    try{
@@ -37,7 +39,6 @@ router.post("/create-user",upload.single("file"),async(req,res,next)=>{
         password:password,
         avatar:fileurl,
     }
-    console.log(user)
     const activationtoken= createActivationtoken(user)
     const activaitonUrl=`http://localhost:3000/activation/${activationtoken}`
      try {
@@ -94,7 +95,23 @@ router.post("/create-user",upload.single("file"),async(req,res,next)=>{
         if(!isvalid){
             return next(new Errorhandlers("Please provide the correct password",400))
         }
+        console.log(user)
         sendToken(user,201,res)
+    } catch (error) {
+        return next(new Errorhandlers(error.message,500))
+    }
+ }))
+ router.get("/getuser",isAuthenticated,catchAsyncerror(async(req,res,next)=>{
+    try {
+        console.log(req.user.id)
+        const user=await User.findById(req.user.id)
+        if(!user){
+            return next(new Errorhandlers("User doesn't exist",401))
+        }
+        res.status(200).json({
+            success:true,
+            user,
+        })
     } catch (error) {
         return next(new Errorhandlers(error.message,500))
     }

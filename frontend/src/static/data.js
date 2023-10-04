@@ -13,7 +13,7 @@ export const navItems = [
     {
       id:3,
       title: "Products",
-      url: "/products",
+      url: "/product",
     },
     {
       id:4,

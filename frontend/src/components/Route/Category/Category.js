@@ -22,7 +22,7 @@ const Category = () => {
         </div>
         <div className=" categorylist shadow-lg  m-2 rounded">
             {categoriesData && categoriesData.map((i,index)=>{
-                return <div className='d-flex justify-content-center align-items-center pointer-event' onClick={()=>handlesubmit(i)}>
+                return <div className='d-flex justify-content-center align-items-center pointer-event' key={index} onClick={()=>handlesubmit(i)}>
                      <img src={i.image_Url} className=' categoryimg' alt="" />
                      <span>{i.title}</span>
                 </div>

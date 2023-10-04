@@ -7,7 +7,7 @@ const bodyparser =require("body-parser")
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 app.use(express.json())
 app.use(cookieparser())
-app.use(bodyparser.urlencoded({extended:true}))
+app.use(bodyparser.urlencoded({extended:true,limit:"50mb"}))
 app.use("/",express.static("../uploads"))
 //config
 app.get("/test",(req,res)=>{

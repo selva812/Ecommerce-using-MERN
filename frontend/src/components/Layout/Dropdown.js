@@ -4,7 +4,7 @@ import "./Dropdown.css"
 export default function Dropdown({categoriesData, setdropdown}) {
     const navigate = useNavigate();
     const submitHandle = (i) => {
-      navigate(`/products?category=${i.title}`);
+      navigate(`/product?category=${i.title}`);
       setdropdown(false);
       window.location.reload();
     };

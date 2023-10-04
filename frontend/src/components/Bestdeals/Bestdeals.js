@@ -11,14 +11,15 @@ export default function Bestdeals() {
     },[])
   return (
     <div>
-        <div className='shadow-lg rounded'>
+        <div className='m-5 mx-auto'>
             <div>
                 <h3 className='m-3'>Best Deals</h3>
             </div>
-            <div className=' bestdealslist '>
+            <div className='bestdealslist mx-4 '>
                 {data && data.map((i,index)=>{
                   return <Productcart data={i} key={index} />
                 })}
+                
             </div>
         </div>
     </div>
