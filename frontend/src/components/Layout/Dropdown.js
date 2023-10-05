@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import "./Dropdown.css"
 export default function Dropdown({categoriesData, setdropdown}) {
     const navigate = useNavigate();
     const submitHandle = (i) => {
@@ -9,13 +8,13 @@ export default function Dropdown({categoriesData, setdropdown}) {
       window.location.reload();
     };
     return (
-      <div className="dropdownclass  bg-white ">
+      <div className="pb-4 w-[270px] bg-[#fff] absolute z-30 rounded-b-md shadow-sm">
         {categoriesData &&
           categoriesData.map((i, index) => (
             <div
               key={index}
               onClick={() => submitHandle(i)}
-              className='dropdownlist'
+              className='flex items-center'
             >
               <img
                 src={i.image_Url}
@@ -28,7 +27,7 @@ export default function Dropdown({categoriesData, setdropdown}) {
                 }}
                 alt=""
               />
-              <h3 className="m-3 droptitle">{i.title}</h3>
+              <h3 className="m-3 cursor-pointer select-none">{i.title}</h3>
             </div>
           ))}
       </div>

@@ -1,26 +1,20 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 import { navItems } from '../../static/data'
-import "./Navbar.css"
 export default function Navbar({active}) {
   return (
-    <div className="navbar-wrapper">
-        <div className="container">
-          <nav className='navbar navbar-expand-md navbar-static-top' id='navbar'>
-            <button className='navbar-toggler ' type='button' 
-                data-bs-toggle="collapse" data-bs-target="#menu"> 
-                <span className=' navbar-toggler-icon'></span> 
-            </button>
-            <div className="collapse navbar-collapse " id='menu'>
-                <ul className='navbar-nav '>
-                {navItems && navItems.map((item,index)=>{
-                     return <li className='nav-item' key={index}>
-                         <a href={`${item.url}`} className={`${active === index + 1 ? "text-success nav-link" : "text-black nav-link" } fs-5`}>{item.title}</a>
-                     </li>
-                     })}
-                </ul>        
-            </div>
-          </nav>
-        </div>
-    </div>
+    <div className={`block 800px:flex items-center`}>
+    {
+       navItems && navItems.map((i,index) => (
+           <div className="flex">
+               <Link to={i.url}
+               className={`${active === index + 1 ? "text-[#17dd1f]" : "text-black 800px:text-[#fff]"} pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer}`}
+               >
+               {i.title}
+               </Link>
+           </div>
+       ))
+    }
+</div>
   )
 }

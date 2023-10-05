@@ -9,7 +9,7 @@ export default function Productcart({data}) {
     const product_name=d.replace(/\s+/g,"-")
     return (
     <>
-    <div className=' bg-white shadow p-3 pointer-event position-relative'>
+    <div className=' bg-white shadow p-3 cursor-pointer relative'>
         <Link to={`/product/${product_name}`}>
             <img src={data.image_Url[0].url}
              alt='' className='img-fluid'/>
@@ -19,43 +19,43 @@ export default function Productcart({data}) {
         </Link>
         <Link to={'/product/${product_name'} className='text-decoration-none text-black '>
            <h4 >{data.name.length > 40 ? data.name.slice(0,40)+"..." : data.name}</h4>
-            <div className="d-flex">
-                <AiFillStar className='mx-2 pointer-event' color='#F6BA00' size={20}/>
-                <AiFillStar className='mx-2 pointer-event' color='#F6BA00' size={20}/>
-                <AiFillStar className='mx-2 pointer-event' color='#F6BA00' size={20}/>
-                <AiFillStar className='mx-2 pointer-event' color='#F6BA00' size={20}/>
-                <AiOutlineStar className='mx-2 pointer-event' color='#F6BA00' size={20}/>
+            <div className="flex">
+                <AiFillStar className='mx-2 cursor-pointer' color='#F6BA00' size={20}/>
+                <AiFillStar className='mx-2 cursor-pointer' color='#F6BA00' size={20}/>
+                <AiFillStar className='mx-2 cursor-pointer' color='#F6BA00' size={20}/>
+                <AiFillStar className='mx-2 cursor-pointer' color='#F6BA00' size={20}/>
+                <AiOutlineStar className='mx-2 cursor-pointer' color='#F6BA00' size={20}/>
             </div>
-            <div className="py-2 position-relative">
-                <div className="d-flex">
-                    <h5>
+            <div className="py-2 flex items-center justify-between">
+                <div className="flex">
+                    <h5 className='font-bold text-[18px] text-[#333] font-Roboto'>
                         {data.price === 0 ? data.price : data.discount_price}
                         $    
                     </h5>
-                    <h4 className='text position-absolute top-0 end-100 start-50 text-decoration-line-through text-danger '>
+                    <h4 className='font-[500] text-[16px] text-[#d55b45] pl-3 mt-[-4px] line-through'>
                         {data.price ? data.price +"$" :null}
                     </h4>
                 </div>
             </div>
-            <span className='text text-success position-absolute bottom-0 start-50 h4'>
+            <span className='font-[400] text-[17px] text-[#68d284]'>
                     {data.total_sell} sold
                 </span> 
         </Link>
-        <div className='position-absolute top-0 end-0 m-2 d-flex flex-column'>
+        <div >
             {click ?
             <AiFillHeart 
              size={20}
              color={click ? 'red' : 'black'}
              onClick={()=>setclick(!click)}
              title='Remove from whislist'
-             className='m-1'
+             className='cursor-pointer absolute right-2 top-5'
              /> :
              <AiOutlineHeart
              size={20}
              onClick={()=>setclick(!click)}
              color={click ? 'red' : 'black'}
              title='Add to whislist'
-             className='m-1'
+             className='cursor-pointer absolute right-2 top-5'
              />
             }
             <AiOutlineEye
@@ -63,14 +63,14 @@ export default function Productcart({data}) {
              onClick={()=>setopen(!open)}
              title='Quick view'
              color='#333'
-             className='m-1'
+             className='cursor-pointer absolute right-2 top-14'
              />
              <AiOutlineShoppingCart
              size={20}
              onClick={()=>setopen(!open)}
              color='#333'
              title='Add to Cart'
-             className='m-1'
+             className='cursor-pointer absolute right-2 top-24'
              />
              {open ? <Productcartdetail 
              setopen={setopen} data={data}

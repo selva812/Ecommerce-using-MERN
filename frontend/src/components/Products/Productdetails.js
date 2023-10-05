@@ -10,7 +10,6 @@ export default function  Productdetails ({data}) {
     return (
     <div className='bg-body'>
         {
-            
              <div className=''>
                 <div>
                     <div>

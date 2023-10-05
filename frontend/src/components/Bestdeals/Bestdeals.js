@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { productData } from '../../static/data'
-import "./Bestdeals.css"
 import Productcart from "../Route/Productcart/Productcart.js"
 export default function Bestdeals() {
     const [data,setdata]=useState([])
@@ -11,11 +10,11 @@ export default function Bestdeals() {
     },[])
   return (
     <div>
-        <div className='m-5 mx-auto'>
-            <div>
+        <div className='w-11/12 mx-auto'>
+            <div className='text-[27px] text-center md:text-start font-[600] font-Roboto pb-[20px]'>
                 <h3 className='m-3'>Best Deals</h3>
             </div>
-            <div className='bestdealslist mx-4 '>
+            <div className='grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12 border-0'>
                 {data && data.map((i,index)=>{
                   return <Productcart data={i} key={index} />
                 })}

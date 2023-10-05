@@ -8,7 +8,6 @@ import Featuredproduct from "../components/Featuredproduct/Featuredproduct"
 import Eventcard from "../components/Event/Eventcard"
 import Sponsored from "../components/Sponsored/Sponsored"
 import Footer from "../components/Layout/Footer/Footer"
-import "./Home.css"
 export default function Home() {
      
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       <Hero/>
       <Category/>
       <Bestdeals/>
-      <h1 className='m-3'>Popular Event</h1>
       <Eventcard/>
       <Featuredproduct/>
       <Sponsored/>

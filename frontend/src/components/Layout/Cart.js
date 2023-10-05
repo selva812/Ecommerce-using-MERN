@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import "./Cart.css"
 import {RxCross1} from "react-icons/rx"
 import {IoBagHandleOutline} from "react-icons/io5"
 import {HiOutlineMinusCircle, HiPlusCircle} from "react-icons/hi"
@@ -26,26 +25,26 @@ export default function Cart({setopencart}) {
     },
   ]
   return (
-    <div className='cartmain'>
-      <div className='cartitem bg-body'>
-       <div className='cartcross'>
+    <div className='fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10'>
+      <div className='fixed top-0 right-0 h-full w-[80%] 800px:w-[25%] bg-white flex flex-col overflow-y-scroll justify-between shadow-sm'>
+       <div className='flex w-full justify-end pt-5 pr-5'>
         <RxCross1 size={30} onClick={()=>setopencart(false)}
-        className='pointer-event mt-2'/>
+        className='cursor-pointer'/>
         </div>
-      <div className='d-flex '>
+      <div className='flex items-center p-4 '>
         <IoBagHandleOutline size={30}/>
-        <h5 className='m-2'> 3 item</h5>
+        <h5 className='pl-2 text-[20px] font-[500] '> 3 item</h5>
       </div>
       <br/>
-      <div className="w-auto ">
+      <div className="w-full border-t ">
         {cartdata && cartdata.map((i,index)=>{
           return <Cartsingle key={index} data={i} />
         })}
       </div>
-      <div className=' px-4'>
-        <Link to={"/checkout"} className='btn btn-danger'>
-          <div className='d-flex align-items-center justify-content-center'>
-            <h1 className='fs-5'> Checkout Now (USD $4050)</h1>
+      <div className=' px-5 mb-3'>
+        <Link to={"/checkout"} >
+          <div className='h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]'>
+            <h1 className='text-[#fff] text-[18px] font-[600]'> Checkout Now (USD $4050)</h1>
           </div>
         </Link>
       </div>
@@ -58,27 +57,29 @@ const Cartsingle=({data})=>{
   const [value,setvalue]= useState(1)
   const total_price=data.price*value
   return (
-    <div className='p-4 border-black'>
-      <div className='w-auto d-flex align-items-center '>
+    <div className='p-4 border-b'>
+      <div className='w-full flex items-center '>
         <div >
-          <div className='cartsingleplus' onClick={()=>setvalue(value+1)}>
-            <HiPlusCircle size={18} color='red'
-            className='pointer-event'/>
+          <div className='bg-[#e44343] border border-[#e4434373] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer' 
+          onClick={()=>setvalue(value+1)}>
+            <HiPlusCircle size={18} color='#fff'/>
           </div>
-          <span className='mx-2'>
+          <span className='pl-[10px]'>
             {value}
           </span>
-          <div onClick={()=>{setvalue(value === 1 ? 1 : value-1)}} className='mx-1'>
-            <HiOutlineMinusCircle size={18} color='grey'
+          <div
+           onClick={()=>{setvalue(value === 1 ? 1 : value-1)}} 
+           className='bg-[#a7abb14f] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer'>
+            <HiOutlineMinusCircle size={18} color='#7d879c'
             className='pointer-event'/>
           </div>
         </div>
         <img src='https://img.freepik.com/free-photo/black-card-with-monochrome-background_23-2148252447.jpg?w=996&t=st=1696264249~exp=1696264849~hmac=f56c1867af877882b611b7dd5dc21f6ae80d3eb11126dfc59247366ef7468be8'
-         className='csimg' alt=""/>
-         <div>
-          <h1 className='fs-6 mx-2' >{data.name}</h1>
-          <h4 className='fs-6 mx-2'> ${data.price}*{value}</h4>
-          <h4 className='fs-6 mx-2 text-danger'> ${total_price}</h4>
+         className='w-[130px] h-min ml-2 mr-2 rounded-[5px]' alt=""/>
+         <div className="pl-[5px]">
+          <h1 >{data.name}</h1>
+          <h4 className='font-[400] text-[15px] text-[#00000082]'> ${data.price}*{value}</h4>
+          <h4 className='font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto'> ${total_price}</h4>
          </div>
       </div>
     </div>

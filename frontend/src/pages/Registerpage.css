@@ -1,9 +1,0 @@
-.dp{
-    width: 36px;
-    height: 36px;
-    object-fit: cover;
-}
-.visibleicon{
-    cursor: pointer;
-    pointer-events: auto;
-}
